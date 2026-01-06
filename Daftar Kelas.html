@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Daftar Kelas</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #FFFFFF;
+}
+
+.header {    
+    background-image: url("header.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 200px;
+    font-family: Lucida Handwriting, cursive;
+    font-size: 25px;
+    color: #4CBB17;
+    padding: 20px;
+    letter-spacing: 5px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1 {
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+.container {
+    display: flex;
+}
+
+.main {
+    width: 100%;
+    padding: 30px;
+    background-color: white;
+    transition: margin-left .5s;
+}
+
+.main h2 {
+    color: #1b5e20;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #1b5e20;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.btn:hover {
+    background-color: #145a1f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit {
+    background-color: #2e7d32;
+    padding: 14px 40px;
+    font-size: 18px;
+    width: 200px;
+    margin: 20px auto;
+    display: block;
+}
+
+.btn-submit:hover {
+    background-color: #1b5e20;
+}
+
+.sidebar {
+    width: 0;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #2e7d32;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar.open {
+    width: 250px;
+}
+
+.sidebar a,
+.dropbtn {
+    display: block;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sidebar a:hover,
+.dropbtn:hover {
+    background-color: #1b5e20;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: white;
+}
+
+.openbtn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 11;
+    background-color: #1b5e20;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.openbtn:hover {
+    background-color: #145a1f;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #388e3c;
+}
+
+.dropdown-content a {
+    padding-left: 30px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.main-content h2 {
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+
+.quote {
+    margin-top: 30px;
+    padding: 20px;
+    width: 50%;
+    background-color: #f1f8e9;
+    border-left: 5px solid #1b5e20;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#myBtn {
+  display: none; 
+  position: fixed; 
+  bottom: 20px; 
+  right: 30px; 
+  z-index: 99; 
+  font-size: 22px;
+  border: none;
+  outline: none;
+  background-color: #1b8a52; 
+  color: white;
+  cursor: pointer;
+  padding: 12px 15px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#myBtn:hover {
+  background-color: #FFE4C4;
+  transform: scale(1.1);
+}
+
+.footer {
+    background-color: #75975e;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    margin-top: 50px;
+}
+
+.form-instructions {
+    background-color: #f1f8e9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    border-left: 4px solid #1b5e20;
+}
+
+.form-instructions h4 {
+    margin-top: 0;
+    color: #1b5e20;
+}
+
+.form-instructions ul {
+    margin: 10px 0 0 20px;
+    padding-left: 0;
+}
+
+.form-instructions li {
+    margin-bottom: 5px;
+}
+
+.form-box {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.form-box h3 {
+    text-align: center;
+    color: #1b5e20;
+    margin-bottom: 20px;
+}
+
+.form-box iframe {
+    width: 100%;
+    height: 900px;
+    border: none;
+}
+
+.class-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 10px;
+}
+
+.class-box {
+    background-color: #f1f8e9;
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.class-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+
+.class-box h4 {
+    color: #1b5e20;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.class-box p {
+    margin: 6px 0;
+}
+
+.class-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+
+</style>    
+</head>
+
+<body>
+
+<button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+
+<div class="header">
+    <h1>✨Qalam Ilmi Academy✨</h1>
+</div>
+<div class="container">
+    <div class="main" id="main">
+        <h2>PENDAFTARAN KELAS MENGAJI AL-QURAN</h2>
+
+<div class="class-container">
+
+    <div class="class-box">
+        <div class="class-icon">📖</div>
+        <h4>Kelas Iqra'</h4>
+        <p>Pembelajaran asas membaca Al-Quran</p>
+        <p><strong>Yuran: RM50 / bulan</strong></p>
+    </div>
+
+    <div class="class-box">
+        <div class="class-icon">📝</div>
+        <h4>Kelas Tajwid</h4>
+        <p>Belajar hukum tajwid & bacaan betul</p>
+        <p><strong>Yuran: RM60 / bulan</strong></p>
+    </div>
+
+    <div class="class-box">
+        <div class="class-icon">👦👧</div>
+        <h4>Al-Quran Kanak-Kanak</h4>
+        <p>Khas untuk kanak-kanak 4–12 tahun</p>
+        <p><strong>Yuran: RM55 / bulan</strong></p>
+    </div>
+
+    <div class="class-box">
+        <div class="class-icon">👳🏻🧕</div>
+        <h4>Al-Quran Dewasa</h4>
+        <p>Untuk remaja & dewasa semua peringkat</p>
+        <p><strong>Yuran: RM70 / bulan</strong></p>
+    </div>
+
+</div>
+
+        
+        <div class="form-instructions">
+            <h4>📝 Arahan Pendaftaran:</h4>
+            <ul>
+                <li>Sila isi semua maklumat yang diperlukan (bertanda <span class="required">*</span>)</li>
+                <li>Anda akan dihubungi dalam masa 2-3 hari bekerja selepas pendaftaran</li>
+                <li>Yuran bulanan akan dimaklumkan selepas pemilihan kelas</li>
+                <li>Sesi percubaan percuma 1 kali untuk pelajar baru</li>
+            </ul>
+        </div>
+        
+        <div class="form-box">
+    <h3>📋 BORANG PENDAFTARAN KELAS MENGAJI</h3>
+
+    <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeRF0_zN3gSA-thFggyjj6afdbfbF448m1LU3lgaHspf6quGg/viewform?embedded=true">
+    </iframe>
+</div>
+        
+        <div class="quote">
+            <p>
+                "Demi sesungguhnya! Kamilah yang menurunkan Al-Quran, dan Kamilah yang memelihara dan menjaganya."
+
+<br><em>(Surah Al-Hijr, ayat 9)</em>
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Sidebar dengan closebtn -->
+    <div id="mySidebar" class="sidebar">
+        <a href="Laman Utama.html">Laman Utama</a>
+        <a href="Tentang Kami.html">Tentang Kami</a>
+
+        <div class="dropdown">
+    <a href="Kelas yang Ditawarkan.html" class="dropbtn">Kelas yang Ditawarkan</a>
+    <div class="dropdown-content">
+        <!-- Link terus ke halaman "Kelas yang Ditawarkan" dengan hash -->
+        <a href="Kelas yang Ditawarkan.html#kelas-iqra" onclick="closeSidebar()">Kelas Iqra</a>
+        <a href="Kelas yang Ditawarkan.html#kelas-tajwid" onclick="closeSidebar()">Kelas Tajwid</a>
+        <a href="Kelas yang Ditawarkan.html#kelas-kanak-kanak" onclick="closeSidebar()">Kanak-Kanak</a>
+        <a href="Kelas yang Ditawarkan.html#kelas-dewasa" onclick="closeSidebar()">Dewasa</a>
+    </div>
+</div> 
+        <a href="Maklumat Guru.html">Maklumat Guru</a>
+        <a href="Daftar Kelas.html">Daftar Kelas</a>
+        <a href="Hubungi.html">Hubungi</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>© 2025 Qalam Ilmi Academy</p>
+</div>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">⬆️</button>
+
+<script>
+function toggleNav() {
+    var sidebar = document.getElementById("mySidebar");
+    var main = document.getElementById("main");
+    
+    sidebar.classList.toggle("open");
+
+    if
+
+(sidebar.classList.contains("open")) {
+        main.style.marginLeft = "250px";
+    } else {
+        main.style.marginLeft = "0";
+    }
+}
+
+function goToClassPage(className) {
+    closeSidebar();
+    window.location.href = "Kelas yang Ditawarkan.html#" + getClassId(className);
+}
+
+// Fungsi tutup sidebar
+function closeSidebar() {
+    var sidebar = document.getElementById("mySidebar");
+    var body = document.body;
+    if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        body.classList.remove("sidebar-open");
+    }
+}
+
+let mybutton = document.getElementById("myBtn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+
+function topFunction() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const formElements = document.querySelectorAll('.form-group');
+    formElements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }, 100 * index);
+    });
+});
+</script>
+
+</body>
+</html>

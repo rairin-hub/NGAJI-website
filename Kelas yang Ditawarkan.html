@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelas yang Ditawarkan</title>
+
+<style>
+/* TAMBAH: KOD BARU UNTUK MENCEGAH WHITE SPACE */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #FFFFFF;
+}
+
+.header {    
+    background-image: url("header.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 200px;
+    font-family: Lucida Handwriting, cursive;
+    font-size: 25px;
+    color: #4CBB17;
+    padding: 20px;
+    letter-spacing: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header h1 {
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+/* TAMBAH: MAIN CONTENT WRAPPER */
+.main-content-wrapper {
+    width: 100%;
+    transition: margin-left 0.5s ease;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    transition: margin-left 0.5s ease;
+}
+
+.sidebar {
+    width: 0;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #2e7d32;
+    overflow-x: hidden;
+    transition: width 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar.open {
+    width: 250px;
+}
+
+.sidebar a,
+.dropbtn {
+    display: block;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sidebar a:hover,
+.dropbtn:hover {
+    background-color: #1b5e20;
+}
+
+.openbtn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    background-color: #1b5e20;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.openbtn:hover {
+    background-color: #145a1f;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #388e3c;
+}
+
+.dropdown-content a {
+    padding-left: 30px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* UBAH: MAIN CONTENT MASUK DALAM MAIN-CONTENT-WRAPPER */
+.main-content {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.class-navigation {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f1f8e9;
+    border-radius: 10px;
+}
+
+.class-nav-btn {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.class-nav-btn:hover {
+    background-color: #1b5e20;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.class-section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 60px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #2e7d32;
+    transition: transform 0.3s ease;
+}
+
+.class-section:hover {
+    transform: translateY(-5px);
+}
+
+.class-section h3 {
+    color: #2e7d32;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e8f5e8;
+}
+
+.class-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.class-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.class-schedule {
+    flex: 1;
+    min-width: 300px;
+}
+
+.class-info h4, .class-schedule h4 {
+    color: #1b5e20;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.teacher-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.teacher-card strong {
+    color: #2e7d32;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.teacher-card .phone {
+    color: #666;
+    font-style: italic;
+}
+
+.schedule-time {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.time-slot {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.day-slot {
+    color: #666;
+    font-style: italic;
+}
+
+.class-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.detail-card {
+    background-color: #f8fdf8;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.detail-card h4 {
+    color: #1b5e20;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8f5e8;
+}
+
+.detail-card ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.detail-card li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.highlight-class {
+    background-color: #e8f5e8 !important;
+    border-left-color: #4CAF50 !important;
+    animation: highlight 2s ease;
+    box-shadow: 0 6px 16px rgba(76, 175, 80, 0.2) !important;
+}
+
+@keyframes highlight {
+    0% { 
+        background-color: #ffffcc; 
+        box-shadow: 0 4px 20px rgba(255, 235, 59, 0.4);
+    }
+    100% { 
+        background-color: #e8f5e8; 
+        box-shadow: 0 6px 16px rgba(76, 175, 80, 0.2);
+    }
+}
+
+.quick-summary {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 40px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quick-summary caption {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2e7d32;
+    padding: 15px;
+    caption-side: top;
+    text-align: center;
+}
+
+.quick-summary th {
+    background-color: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+    border: 1px solid #1b5e20;
+}
+
+.quick-summary td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.quick-summary tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.quick-summary tr:hover {
+    background-color: #f1f8e9;
+}
+
+/* UBAH: HANYA CONTENT WRAPPER & FOOTER YANG BERGERAK */
+body.sidebar-open .main-content-wrapper,
+body.sidebar-open .footer {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+}
+
+/* HEADER TETAP TIDAK BERGERAK - KELUARKAN DARI RULE DI ATAS */
+
+@media screen and (max-width: 768px) {
+    /* UBAH: Untuk mobile saat sidebar terbuka */
+    body.sidebar-open .main-content-wrapper,
+    body.sidebar-open .footer {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    .class-header {
+        flex-direction: column;
+    }
+    
+    .class-info, .class-schedule {
+        min-width: 100%;
+    }
+    
+    .class-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .class-nav-btn {
+        min-width: 150px;
+        padding: 10px 20px;
+    }
+    
+    .main-content h2 {
+        font-size: 24px;
+    }
+    
+    .class-section h3 {
+        font-size: 22px;
+    }
+    
+    /* TAMBAH: Sidebar full screen pada mobile */
+    .sidebar.open {
+        width: 100%;
+    }
+    
+    .header {
+        font-size: 20px;
+        min-height: 150px;
+    }
+    
+    .openbtn {
+        top: 10px;
+        left: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .class-navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .class-nav-btn {
+        width: 100%;
+    }
+}
+
+#myBtn {
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    right: 30px; 
+    z-index: 99; 
+    font-size: 22px;
+    border: none;
+    outline: none;
+    background-color: #1b8a52; 
+    color: white;
+    cursor: pointer;
+    padding: 12px 15px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#myBtn:hover {
+    background-color: #FFE4C4;
+    transform: scale(1.1);
+}
+
+.footer {
+    background-color: #75975e;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    transition: margin-left 0.5s ease, width 0.5s ease;
+    width: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+
+<!-- HEADER TETAP DI LUAR WRAPPER -->
+<div class="header">
+    <h1>✨Qalam Ilmi Academy✨</h1>
+</div>
+
+<!-- HANYA CONTENT SAHAJA DALAM WRAPPER -->
+<div class="main-content-wrapper">
+    <div class="main-content">
+        <h2 id="jadual">Jadual Kelas Mengaji</h2>
+        
+        <!-- Navigation untuk kelas -->
+        <div class="class-navigation">
+            <button class="class-nav-btn" onclick="scrollToClass('iqra')">Kelas Iqra'</button>
+            <button class="class-nav-btn" onclick="scrollToClass('tajwid')">Kelas Tajwid</button>
+            <button class="class-nav-btn" onclick="scrollToClass('kanak-kanak')">Al-Quran Kanak-Kanak</button>
+            <button class="class-nav-btn" onclick="scrollToClass('dewasa')">Al-Quran Dewasa</button>
+        </div>
+        
+        <!-- Quick Summary Table -->
+        <table class="quick-summary">
+            <caption>JADUAL RINGKAS KELAS MENGAJI</caption>
+            <thead>
+                <tr>
+                    <th>KELAS</th>
+                    <th>SESI PAGI</th>
+                    <th>SESI MALAM</th>
+                    <th>PENGAJAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>IQRA'</strong></td>
+                    <td>9:00 AM -- 10.00 AM (JUMAAT)</td>
+                    <td>8:00 PM -- 9:00 PM (KHAMIS)</td>
+                    <td>USTAZ ADAM (011-2388132)</td>
+                </tr>
+                <tr>
+                    <td><strong>TAJWID</strong></td>
+                    <td>10:00 AM -- 11.30 AM (SABTU)</td>
+                    <td>8.30 PM -- 10.00 PM (JUMAAT)</td>
+                    <td>USTAZAH SAKINAH (012-2891369)</td>
+                </tr>
+                <tr>
+                    <td><strong>AL-QURAN KANAK-KANAK</strong></td>
+                    <td>11:00 AM -- 12:00 PM (SABTU)</td>
+                    <td>8.30 PM -- 9.30 PM (RABU)</td>
+                    <td>USTAZ ANUAR (013-5662717)</td>
+                </tr>
+                <tr>
+                    <td><strong>AL-QURAN DEWASA</strong></td>
+                    <td>2:00 PM -- 4.00 PM (ISNIN)</td>
+                    <td>9:00 PM -- 11:00 PM (JUMAAT)</td>
+                    <td>USTAZAH JANNAH (012-4152331)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Kelas 1: Iqra' -->
+        <section id="kelas-iqra" class="class-section">
+            <h3>📚 Kelas Iqra'</h3>
+            
+            <div class="class-header">
+                <div class="class-info">
+                    <h4>Maklumat Kelas</h4>
+                    <div class="teacher-card">
+                        <strong>PENGAJAR: USTAZ ADAM</strong>
+                        <span class="phone">Telefon: 011-2388132</span>
+                    </div>
+                </div>
+                
+                <div class="class-schedule">
+                    <h4>Waktu Kelas</h4>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI PAGI:</span>
+                        <span class="day-slot">9:00 AM -- 10.00 AM (JUMAAT)</span>
+                    </div>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI MALAM:</span>
+                        <span class="day-slot">8:00 PM -- 9:00 PM (KHAMIS)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-details">
+                <div class="detail-card">
+                    <h4>PENERANGAN</h4>
+                    <ul>
+                        <li>Khas untuk pelajar yang baru bermula membaca Al-Quran</li>
+                        <li>Fokus utama adalah mengenal huruf hijaiyah, sebutan yang betul dan asas bacaan secara berperingkat</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>PEMBELAJARAN</h4>
+                    <ul>
+                        <li>Pengenalan huruf hijaiyah</li>
+                        <li>Sebutan dan makhraj huruf</li>
+                        <li>Bacaan Iqra' 1 hingga 6</li>
+                        <li>Latihan bacaan secara berperingkat</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>KELEBIHAN</h4>
+                    <ul>
+                        <li>Guru berpengalaman dan mesra pelajar</li>
+                        <li>Pembelajaran secara berperingkat dan sistematik</li>
+                        <li>Suasana pembelajaran yang selesa</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kelas 2: Tajwid -->
+        <section id="kelas-tajwid" class="class-section">
+            <h3>🎵 Kelas Tajwid</h3>
+            
+            <div class="class-header">
+                <div class="class-info">
+                    <h4>Maklumat Kelas</h4>
+                    <div class="teacher-card">
+                        <strong>PENGAJAR: USTAZAH SAKINAH</strong>
+                        <span class="phone">Telefon: 012-2891369</span>
+                    </div>
+                </div>
+                
+                <div class="class-schedule">
+                    <h4>Waktu Kelas</h4>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI PAGI:</span>
+                        <span class="day-slot">10:00 AM -- 11.30 AM (SABTU)</span>
+                    </div>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI MALAM:</span>
+                        <span class="day-slot">8.30 PM -- 10.00 PM (JUMAAT)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-details">
+                <div class="detail-card">
+                    <h4>PENERANGAN</h4>
+                    <ul>
+                        <li>Bertujuan memperbetulkan dan memperindahkan bacaan Al-Quran mengikut hukum tajwid yang betul</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>PEMBELAJARAN</h4>
+                    <ul>
+                        <li>Hukum Nun Sakinah dan Tanwin</li>
+                        <li>Hukum Mim Sakinah</li>
+                        <li>Mad dan Qalqalah</li>
+                        <li>Makhraj dan sifat huruf</li>
+                        <li>Praktikal bacaan bertajwid</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>KELEBIHAN</h4>
+                    <ul>
+                        <li>Fokus kepada praktikal bacaan</li>
+                        <li>Pembetulan bacaan secara individu</li>
+                        <li>Sesuai untuk semua peringkat</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kelas 3: Al-Quran Kanak-Kanak -->
+        <section id="kelas-kanak-kanak" class="class-section">
+            <h3>👧👦 Al-Quran Kanak-Kanak</h3>
+            
+            <div class="class-header">
+                <div class="class-info">
+                    <h4>Maklumat Kelas</h4>
+                    <div class="teacher-card">
+                        <strong>PENGAJAR: USTAZ ANUAR</strong>
+                        <span class="phone">Telefon: 013-5662717</span>
+                    </div>
+                </div>
+                
+                <div class="class-schedule">
+                    <h4>Waktu Kelas</h4>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI PAGI:</span>
+                        <span class="day-slot">11:00 AM -- 12:00 PM (SABTU)</span>
+                    </div>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI MALAM:</span>
+                        <span class="day-slot">8.30 PM -- 9.30 PM (RABU)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-details">
+                <div class="detail-card">
+                    <h4>PENERANGAN</h4>
+                    <ul>
+                        <li>Membantu kanak-kanak membaca dan memahami Al-Quran dalam suasana pembelajaran yang menyeronokkan dan berkesan</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>PEMBELAJARAN</h4>
+                    <ul>
+                        <li>Bacaan Iqra' atau Al-Quran</li>
+                        <li>Asas tajwid</li>
+                        <li>Hafazan surah-surah pendek</li>
+                        <li>Adab membaca Al-Quran dan doa harian</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>KELEBIHAN</h4>
+                    <ul>
+                        <li>Kaedah pembelajaran interaktif</li>
+                        <li>Guru penyayang dan berpengalaman</li>
+                        <li>Perkembangan bacaan dipantau secara berkala</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kelas 4: Al-Quran Dewasa -->
+        <section id="kelas-dewasa" class="class-section">
+            <h3>👳🏻🧕 Al-Quran Dewasa</h3>
+            
+            <div class="class-header">
+                <div class="class-info">
+                    <h4>Maklumat Kelas</h4>
+                    <div class="teacher-card">
+                        <strong>PENGAJAR: USTAZAH JANNAH</strong>
+                        <span class="phone">Telefon: 012-4152331</span>
+                    </div>
+                </div>
+                
+                <div class="class-schedule">
+                    <h4>Waktu Kelas</h4>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI PAGI:</span>
+                        <span class="day-slot">2:00 PM -- 4.00 PM (ISNIN)</span>
+                    </div>
+                    <div class="schedule-time">
+                        <span class="time-slot">SESI MALAM:</span>
+                        <span class="day-slot">9:00 PM -- 11:00 PM (JUMAAT)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-details">
+                <div class="detail-card">
+                    <h4>PENERANGAN</h4>
+                    <ul>
+                        <li>Sesuai untuk individu yang ingin belajar dari asas atau memperbaiki bacaan Al-Quran tanpa mengira usia</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>PEMBELAJARAN</h4>
+                    <ul>
+                        <li>Bacaan Iqra' atau Al-Quran</li>
+                        <li>Pembetulan bacaan dan tajwid</li>
+                        <li>Tadabbur ringkas ayat-ayat pilihan</li>
+                        <li>Hafazan surah pilihan</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h4>KELEBIHAN</h4>
+                    <ul>
+                        <li>Pembelajaran fleksibel dan santai</li>
+                        <li>Kelas persendirian atau berkumpulan</li>
+                        <li>Suasana pembelajaran yang selesa dan tidak tertekan</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+    <a href="Laman Utama.html">Laman Utama</a>
+    <a href="Tentang Kami.html">Tentang Kami</a>
+    
+    <div class="dropdown">
+        <a href="Kelas yang Ditawarkan.html" class="dropbtn">Kelas yang Ditawarkan</a>
+            <div class="dropdown-content">
+            <a href="#kelas-iqra" onclick="scrollToClass('iqra')">Kelas Iqra</a>
+            <a href="#kelas-tajwid" onclick="scrollToClass('tajwid')">Kelas Tajwid</a>
+            <a href="#kelas-kanak-kanak" onclick="scrollToClass('kanak-kanak')">Kanak-Kanak</a>
+            <a href="#kelas-dewasa" onclick="scrollToClass('dewasa')">Dewasa</a>
+        </div>
+    </div>
+    
+    <a href="Maklumat Guru.html">Maklumat Guru</a>
+    <a href="Daftar Kelas.html">Daftar Kelas</a>
+    <a href="Hubungi.html">Hubungi</a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>© 2025 Qalam Ilmi Academy</p>
+</div>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">⬆</button>
+
+<script>
+function toggleNav() {
+    var sidebar = document.getElementById("mySidebar");
+    var body = document.body;
+    
+    // Toggle sidebar open/close
+    sidebar.classList.toggle("open");
+    
+    // Toggle body class untuk efek geser
+    if (sidebar.classList.contains("open")) {
+        body.classList.add("sidebar-open");
+    } else {
+        body.classList.remove("sidebar-open");
+    }
+}
+
+function scrollToClass(className) {
+    // Tutup sidebar jika terbuka
+    const sidebar = document.getElementById("mySidebar");
+    if (sidebar.classList.contains("open")) {
+        toggleNav(); // Tutup sidebar
+    }
+    
+    // Tentukan ID berdasarkan nama kelas
+    const classIds = {
+        'iqra': 'kelas-iqra',
+        'tajwid': 'kelas-tajwid',
+        'kanak-kanak': 'kelas-kanak-kanak',
+        'dewasa': 'kelas-dewasa'
+    };
+    
+    const targetId = classIds[className];
+    if (targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            // Remove previous highlights
+            const previousHighlights = document.querySelectorAll('.highlight-class');
+            previousHighlights.forEach(section => {
+                section.classList.remove('highlight-class');
+            });
+            
+            // Scroll to element
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+            
+            // Add highlight
+            targetElement.classList.add('highlight-class');
+            
+            // Remove highlight after 3 seconds
+            setTimeout(() => {
+                targetElement.classList.remove('highlight-class');
+            }, 3000);
+            
+            // Update URL
+            window.history.pushState(null, null, `#${targetId}`);
+        }
+    }
+}
+
+// Function untuk scroll ke atas
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Handle URL hash on page load
+window.addEventListener('load', function() {
+    const hash = window.location.hash;
+    if (hash) {
+        // Extract class name from hash
+        const classId = hash.substring(1);
+        const classMap = {
+            'kelas-iqra': 'iqra',
+            'kelas-tajwid': 'tajwid',
+            'kelas-kanak-kanak': 'kanak-kanak',
+            'kelas-dewasa': 'dewasa'
+        };
+        
+        const className = classMap[classId];
+        if (className) {
+            // Scroll to the class after a short delay
+            setTimeout(() => {
+                scrollToClass(className);
+            }, 500);
+        }
+    }
+});
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', function() {
+    const hash = window.location.hash;
+    if (hash) {
+        const classId = hash.substring(1);
+        const classMap = {
+            'kelas-iqra': 'iqra',
+            'kelas-tajwid': 'tajwid',
+            'kelas-kanak-kanak': 'kanak-kanak',
+            'kelas-dewasa': 'dewasa'
+        };
+        
+        const className = classMap[classId];
+        if (className) {
+            scrollToClass(className);
+        }
+    }
+});
+
+let mybutton = document.getElementById("myBtn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+
+function topFunction() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('resize', function() {
+    const sidebar = document.getElementById("mySidebar");
+    if (sidebar.classList.contains("open") && window.innerWidth <= 768) {
+        toggleNav();
+    }
+});
+
+document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', function() {
+        const sidebar = document.getElementById("mySidebar");
+        if (sidebar.classList.contains("open")) {
+            toggleNav();
+        }
+    });
+});
+</script>
+
+</body>
+</html>
