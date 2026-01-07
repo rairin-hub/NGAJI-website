@@ -343,12 +343,14 @@ body.sidebar-open .footer {
     
     .sidebar.open {
         width: 70%;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
     }
 
     #main {
         margin-left: 0 !important;
     }
-}
+    
     .contact-container {
         flex-direction: column;
         align-items: center;
@@ -367,9 +369,33 @@ body.sidebar-open .footer {
     .openbtn {
         top: 10px;
         left: 10px;
+        z-index: 1001;
+    }
+    
+    /* TAMBAH INI UNTUK OVERLAY EFFECT */
+    body.sidebar-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: block;
+    }
+    
+    /* Prevent body scroll when sidebar open */
+    body.sidebar-open {
+        overflow: hidden;
+    }
+    
+    /* Ensure sidebar links are clickable */
+    .sidebar a, .dropbtn {
+        pointer-events: auto;
     }
 }
-
+    
 @media screen and (max-width: 600px) {
     .main h2 {
         font-size: 20px;
@@ -553,6 +579,7 @@ document.querySelectorAll('.sidebar a').forEach(link => {
 </body>
 
 </html>
+
 
 
 
