@@ -256,18 +256,21 @@ body.sidebar-open .footer {
     transition: margin-left 0.5s ease, width 0.5s ease;
 }
 
-/* TAMBAH: Responsive untuk mobile */
 @media screen and (max-width: 768px) {
-    body.sidebar-open .main-content-wrapper,
+    body.sidebar-open .content-wrapper,
     body.sidebar-open .footer {
         margin-left: 0 !important;
         width: 100% !important;
     }
     
     .sidebar.open {
-        width: 100%;
+        width: 70%;
     }
-    
+
+    #main {
+        margin-left: 0 !important;
+    }
+}
     .vision-mission-grid {
         grid-template-columns: 1fr;
     }
@@ -457,4 +460,5 @@ document.querySelectorAll('.sidebar a').forEach(link => {
 </body>
 
 </html>
+
 
