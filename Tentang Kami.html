@@ -217,7 +217,6 @@ body {
     display: block;
 }
 
-/* UBAH: HANYA CONTENT WRAPPER & FOOTER YANG BERGERAK */
 body.sidebar-open .main-content-wrapper,
 body.sidebar-open .footer {
     margin-left: 250px;
@@ -256,7 +255,7 @@ body.sidebar-open .footer {
 }
 
 @media screen and (max-width: 768px) {
-    body.sidebar-open .content-wrapper,
+    body.sidebar-open .main-content-wrapper,
     body.sidebar-open .footer {
         margin-left: 0 !important;
         width: 100% !important;
@@ -264,12 +263,22 @@ body.sidebar-open .footer {
     
     .sidebar.open {
         width: 70%;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
     }
-
-    #main {
-        margin-left: 0 !important;
+    
+    body.sidebar-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: block;
     }
-}
+    
     .vision-mission-grid {
         grid-template-columns: 1fr;
     }
@@ -281,11 +290,26 @@ body.sidebar-open .footer {
     .header {
         font-size: 20px;
         min-height: 150px;
+        z-index: 1; 
     }
     
     .openbtn {
         top: 10px;
         left: 10px;
+        z-index: 1001; 
+    }
+    
+    .main-content-wrapper {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .container {
+        padding: 20px 15px;
+    }
+    
+    body.sidebar-open {
+        overflow: hidden;
     }
 }
 
@@ -302,7 +326,33 @@ body.sidebar-open .footer {
     .vision-box, .mission-box, .about-box {
         padding: 15px;
     }
+    
+    .sidebar.open {
+        width: 85%;
+    }
 }
+
+@media screen and (max-width: 768px) {
+    /* Click outside to close sidebar */
+    body.sidebar-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 998;
+        cursor: pointer;
+    }
+    
+    .main-content-wrapper,
+    .container,
+    .content-section {
+        transition: none !important; 
+    }
+}
+    
 </style>
 </head>
 
@@ -310,12 +360,10 @@ body.sidebar-open .footer {
 
 <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
 
-<!-- HEADER - TETAP DI ATAS, TIDAK DALAM WRAPPER -->
 <div class="header">
     <h1>✨Qalam Ilmi Academy✨</h1>
 </div>
 
-<!-- HANYA CONTENT SAHAJA DALAM WRAPPER -->
 <div class="main-content-wrapper">
     <div class="container">
         <!-- About Us Section -->
@@ -403,24 +451,47 @@ function toggleNav() {
     var sidebar = document.getElementById("mySidebar");
     var body = document.body;
     
-    // Toggle sidebar open/close
     sidebar.classList.toggle("open");
     
-    // Toggle body class untuk efek geser
-    if (sidebar.classList.contains("open")) {
+     if (sidebar.classList.contains("open")) {
         body.classList.add("sidebar-open");
+        
+        // Untuk mobile: block body scroll
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'hidden';
+        }
     } else {
         body.classList.remove("sidebar-open");
+        
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'auto';
+        }
     }
 }
 
-// Fungsi tutup sidebar
+document.addEventListener('click', function(event) {
+    var sidebar = document.getElementById("mySidebar");
+    var openbtn = document.querySelector('.openbtn');
+    
+    if (window.innerWidth <= 768 && 
+        sidebar.classList.contains('open') &&
+        !sidebar.contains(event.target) && 
+        event.target !== openbtn) {
+        
+        toggleNav();
+    }
+});
+    
 function closeSidebar() {
     var sidebar = document.getElementById("mySidebar");
     var body = document.body;
     if (sidebar.classList.contains("open")) {
         sidebar.classList.remove("open");
         body.classList.remove("sidebar-open");
+
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'auto';
+        }
     }
 }
 
@@ -440,7 +511,6 @@ function topFunction() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// TAMBAH: Auto close sidebar di mobile
 window.addEventListener('resize', function() {
     const sidebar = document.getElementById("mySidebar");
     if (sidebar.classList.contains("open") && window.innerWidth <= 768) {
@@ -448,7 +518,6 @@ window.addEventListener('resize', function() {
     }
 });
 
-// TAMBAH: Close sidebar bila klik link sidebar
 document.querySelectorAll('.sidebar a').forEach(link => {
     link.addEventListener('click', function() {
         closeSidebar();
@@ -459,6 +528,7 @@ document.querySelectorAll('.sidebar a').forEach(link => {
 </body>
 
 </html>
+
 
 
 
