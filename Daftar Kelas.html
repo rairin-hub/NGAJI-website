@@ -373,7 +373,7 @@ body {
         <div class="dropdown">
     <a href="Kelas yang Ditawarkan.html" class="dropbtn">Kelas yang Ditawarkan</a>
     <div class="dropdown-content">
-        <!-- Link terus ke halaman "Kelas yang Ditawarkan" dengan hash -->
+        
         <a href="Kelas yang Ditawarkan.html#kelas-iqra" onclick="closeSidebar()">Kelas Iqra</a>
         <a href="Kelas yang Ditawarkan.html#kelas-tajwid" onclick="closeSidebar()">Kelas Tajwid</a>
         <a href="Kelas yang Ditawarkan.html#kelas-kanak-kanak" onclick="closeSidebar()">Kanak-Kanak</a>
@@ -414,7 +414,7 @@ function goToClassPage(className) {
     window.location.href = "Kelas yang Ditawarkan.html#" + getClassId(className);
 }
 
-// Fungsi tutup sidebar
+
 function closeSidebar() {
     var sidebar = document.getElementById("mySidebar");
     var body = document.body;
@@ -459,4 +459,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </body>
 
 </html>
+
 
