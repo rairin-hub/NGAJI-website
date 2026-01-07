@@ -372,7 +372,6 @@ body.sidebar-open .footer {
         z-index: 1001;
     }
     
-    /* TAMBAH INI UNTUK OVERLAY EFFECT */
     body.sidebar-open::before {
         content: '';
         position: fixed;
@@ -385,12 +384,10 @@ body.sidebar-open .footer {
         display: block;
     }
     
-    /* Prevent body scroll when sidebar open */
     body.sidebar-open {
         overflow: hidden;
     }
     
-    /* Ensure sidebar links are clickable */
     .sidebar a, .dropbtn {
         pointer-events: auto;
     }
@@ -409,6 +406,32 @@ body.sidebar-open .footer {
     
     .contact-box h3, .map-box h3, .form-box h3 {
         font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body.sidebar-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        cursor: pointer;
+    }
+    
+    body.sidebar-open .content-wrapper,
+    body.sidebar-open .container,
+    body.sidebar-open .main,
+    body.sidebar-open .contact-container {
+        pointer-events: none;
+    }
+    
+    .sidebar,
+    .sidebar * {
+        pointer-events: auto !important;
     }
 }
 </style>
@@ -532,17 +555,46 @@ function toggleNav() {
     
     if (sidebar.classList.contains("open")) {
         body.classList.add("sidebar-open");
+        
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'hidden';
+            
+            var overlayClickHandler = function(event) {
+                if (event.target === document.body || 
+                    event.target.classList.contains('content-wrapper') ||
+                    event.target.closest('.content-wrapper')) {
+                    toggleNav();
+                }
+            };
+
+             body._overlayClickHandler = overlayClickHandler;
+            document.addEventListener('click', overlayClickHandler);
+        }
     } else {
         body.classList.remove("sidebar-open");
+        
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'auto';
+            
+            if (body._overlayClickHandler) {
+                document.removeEventListener('click', body._overlayClickHandler);
+                delete body._overlayClickHandler;
+            }
+        }
     }
 }
 
 function closeSidebar() {
     var sidebar = document.getElementById("mySidebar");
     var body = document.body;
+    
     if (sidebar.classList.contains("open")) {
         sidebar.classList.remove("open");
         body.classList.remove("sidebar-open");
+
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'auto';
+        }
     }
 }
 
@@ -565,20 +617,20 @@ function topFunction() {
 window.addEventListener('resize', function() {
     const sidebar = document.getElementById("mySidebar");
     if (sidebar.classList.contains("open") && window.innerWidth <= 768) {
-        toggleNav();
-    }
-});
 
-document.querySelectorAll('.sidebar a').forEach(link => {
-    link.addEventListener('click', function() {
-        closeSidebar();
-    });
-});
+        document.body.classList.add("sidebar-open");
+    } else if (sidebar.classList.contains("open") && window.innerWidth > 768) {
+
+     document.body.style.overflow = 'auto';
+    }
+});   
+   
 </script>
 
 </body>
 
 </html>
+
 
 
 
