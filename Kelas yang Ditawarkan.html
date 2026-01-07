@@ -353,10 +353,6 @@ body.sidebar-open .footer {
         width: 70%;
     }
 
-    #main {
-        margin-left: 0 !important;
-    }
-}
     .class-header {
         flex-direction: column;
     }
@@ -382,10 +378,6 @@ body.sidebar-open .footer {
         font-size: 22px;
     }
     
-    .sidebar.open {
-        width: 100%;
-    }
-    
     .header {
         font-size: 20px;
         min-height: 150px;
@@ -394,6 +386,26 @@ body.sidebar-open .footer {
     .openbtn {
         top: 10px;
         left: 10px;
+    }
+
+    .sidebar {
+        z-index: 999;
+    }
+    
+    body.sidebar-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        display: none;
+    }
+    
+    body.sidebar-open::before {
+        display: block;
     }
 }
 
@@ -898,6 +910,7 @@ document.querySelectorAll('.sidebar a').forEach(link => {
 </body>
 
 </html>
+
 
 
 
