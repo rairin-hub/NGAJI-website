@@ -6,7 +6,7 @@
 <title>Kelas yang Ditawarkan</title>
 
 <style>
-/* TAMBAH: KOD BARU UNTUK MENCEGAH WHITE SPACE */
+
 html, body {
     overflow-x: hidden;
     width: 100%;
@@ -45,7 +45,6 @@ body {
     margin: 0;
 }
 
-/* TAMBAH: MAIN CONTENT WRAPPER */
 .main-content-wrapper {
     width: 100%;
     transition: margin-left 0.5s ease;
@@ -125,7 +124,6 @@ body {
     display: block;
 }
 
-/* UBAH: MAIN CONTENT MASUK DALAM MAIN-CONTENT-WRAPPER */
 .main-content {
     padding: 20px;
     margin: 20px auto;
@@ -338,23 +336,27 @@ body {
     background-color: #f1f8e9;
 }
 
-/* UBAH: HANYA CONTENT WRAPPER & FOOTER YANG BERGERAK */
 body.sidebar-open .main-content-wrapper,
 body.sidebar-open .footer {
     margin-left: 250px;
     width: calc(100% - 250px);
 }
 
-/* HEADER TETAP TIDAK BERGERAK - KELUARKAN DARI RULE DI ATAS */
 
 @media screen and (max-width: 768px) {
-    /* UBAH: Untuk mobile saat sidebar terbuka */
     body.sidebar-open .main-content-wrapper,
     body.sidebar-open .footer {
         margin-left: 0 !important;
         width: 100% !important;
     }
-    
+    .sidebar.open {
+        width: 70%;
+    }
+
+    #main {
+        margin-left: 0 !important;
+    }
+}
     .class-header {
         flex-direction: column;
     }
@@ -900,4 +902,5 @@ document.querySelectorAll('.sidebar a').forEach(link => {
 </body>
 
 </html>
+
 
