@@ -19,7 +19,6 @@ body {
     background-color: #FFFFFF;
 }
 
-/* HEADER TETAP DI TEMPAT - TIDAK ADA TRANSITION */
 .header {    
     background-image: url("header.jpg");
     background-size: cover;
@@ -45,7 +44,6 @@ body {
     margin: 0;
 }
 
-/* TAMBAH: Content wrapper untuk semua content yang bergerak */
 .content-wrapper {
     width: 100%;
     transition: margin-left 0.5s ease;
@@ -54,7 +52,7 @@ body {
 .container {
     display: flex;
     text-align: center;
-    justify-content: center; /* TAMBAH: Center content */
+    justify-content: center; 
     transition: margin-left 0.5s ease;
 }
 
@@ -156,7 +154,6 @@ body {
     display: block;
 }
 
-/* TAMBAH: Container untuk contact, map, form */
 .contact-container {
     display: flex;
     flex-wrap: wrap;
@@ -168,21 +165,19 @@ body {
     transition: margin-left 0.5s ease;
 }
 
-/* UBAH: Center semua boxes */
 .contact-box, .map-box, .form-box {
     width: 100%;
-    max-width: 500px; /* Lebar maksimum untuk semua boxes */
+    max-width: 500px; 
     margin: 0 auto 40px auto;
     padding: 30px;
     border: 1px solid #1b8a52;
     border-radius: 10px;
-    text-align: center; /* Center text dalam box */
+    text-align: center; 
     background-color: #f9f9f9;
     transition: transform 0.3s ease;
     box-sizing: border-box;
 }
 
-/* Center khusus untuk contact-box */
 .contact-box {
     text-align: center;
     display: flex;
@@ -227,7 +222,6 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Center map-box */
 .map-box {
     text-align: center;
 }
@@ -248,7 +242,6 @@ body {
     margin-top: 15px;
 }
 
-/* Center form-box */
 .form-box {
     text-align: center;
 }
@@ -261,7 +254,7 @@ body {
 
 .form-box form {
     width: 100%;
-    text-align: left; /* Biarkan form content left-aligned dalam box */
+    text-align: left; 
 }
 
 .form-box label {
@@ -342,8 +335,6 @@ body.sidebar-open .footer {
     width: calc(100% - 250px);
 }
 
-/* HEADER TETAP TIDAK BERGERAK - TIDAK DIMASUKKAN DALAM RULE DI ATAS */
-
 /* TAMBAH: Responsive untuk mobile */
 @media screen and (max-width: 768px) {
     body.sidebar-open .content-wrapper,
@@ -400,13 +391,11 @@ body.sidebar-open .footer {
 
 <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
 
-<!-- HEADER - TETAP DI TEMPAT, TIDAK DALAM WRAPPER -->
 <div class="header">
     <h1>✨Qalam Ilmi Academy✨</h1>
 </div>
 
-<!-- SEMUA CONTENT YANG BOLEH BERGERAK DALAM WRAPPER INI -->
-<div class="content-wrapper">
+    <div class="content-wrapper">
     <div class="container">
         <div class="main" id="main">
             <h2>ANDA MEMERLUKAN BANTUAN DAN</h2> 
@@ -417,9 +406,7 @@ body.sidebar-open .footer {
         </div>
     </div>
 
-    <!-- TAMBAH: Container untuk contact, map, form -->
     <div class="contact-container">
-        <!-- CONTACT BOX - CENTERED -->
         <div class="contact-box">
             <h3>Hubungi Kami</h3>
             <p>
@@ -438,7 +425,6 @@ body.sidebar-open .footer {
             <p>Ahad - Khamis: 9:00am - 5:00pm</p>
         </div>
 
-        <!-- MAP BOX - CENTERED -->
         <div class="map-box">
             <h3>Lokasi Kami</h3>
 
@@ -460,7 +446,6 @@ body.sidebar-open .footer {
             </p>
         </div>
 
-        <!-- FORM BOX - CENTERED -->
         <div class="form-box">
             <h3>Pertanyaan</h3>
 
@@ -505,7 +490,7 @@ body.sidebar-open .footer {
 
 <!-- Footer -->
 <div class="footer">
-    <p>© 2025 Qalam Ilmi Academy</p>
+   <p>© 2025 Qalam Ilmi Academy. Semua Hak Cipta Terpelihara.</p>
 </div>
 
 <button onclick="topFunction()" id="myBtn" title="Go to top">⬆</button>
@@ -566,3 +551,4 @@ document.querySelectorAll('.sidebar a').forEach(link => {
 </body>
 
 </html>
+
