@@ -335,7 +335,6 @@ body.sidebar-open .footer {
     width: calc(100% - 250px);
 }
 
-/* TAMBAH: Responsive untuk mobile */
 @media screen and (max-width: 768px) {
     body.sidebar-open .content-wrapper,
     body.sidebar-open .footer {
@@ -344,8 +343,11 @@ body.sidebar-open .footer {
     }
     
     .sidebar.open {
-        width: 100%;
+        width: 70%;
     }
+
+    #main {
+        margin-left: 0 !important;
     
     .contact-container {
         flex-direction: column;
@@ -551,4 +553,5 @@ document.querySelectorAll('.sidebar a').forEach(link => {
 </body>
 
 </html>
+
 
